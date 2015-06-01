@@ -10,6 +10,7 @@ import (
 // specification.
 type Component struct {
 	Name            string            `json:"name"`
+	Main            interface{}       `json:"main"`
 	Version         string            `json:"version"`
 	Ignore          []string          `json:"ignore"`
 	Dependencies    map[string]string `json:"dependencies"`
