@@ -16,8 +16,20 @@ type Component struct {
 	Dependencies    map[string]string `json:"dependencies"`
 	DevDependencies map[string]string `json:"devDependencies"`
 	Private         bool              `json:"private,omitempty"`
+}
 
-	// TODO(sqs): add Main
+// Get the main of component
+func (c *Component) GetMain() []string {
+	res := make([]string, 0)
+	switch ms := c.Main.(type) {
+	case string:
+		res = append(res, ms)
+	case []interface{}:
+		for _, m := range ms {
+			res = append(res, m.(string))
+		}
+	}
+	return res
 }
 
 // ParseBowerJSON parses a bower.json file from data.
